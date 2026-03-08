@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Credit Card Fraud Detection</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+
+</head>
+
+<body>
+
+<div class="container">
+
+<h2>Credit Card Fraud Detection</h2>
+
+<p>Paste all 29 feature values separated by comma ( , )</p>
+
+<form action="/predict" method="post">
+
+<textarea name="features" placeholder="Example: 0.1, -1.2, 0.5, ... , 120"></textarea><br><br>
+
+<button type="submit">Predict</button>
+
+</form>
+
+<div class="result">
+{% if prediction_text %}
+Prediction: <span class="{{ 'fraud' if 'Fraud' in prediction_text else 'normal' }}">
+{{ prediction_text }}
+</span>
+{% endif %}
+</div>
+
+</div>
+
+</body>
+</html>
