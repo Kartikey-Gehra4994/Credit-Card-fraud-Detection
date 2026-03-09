@@ -1,13 +1,19 @@
 # Credit Card Fraud Detection
 
 This project builds a machine learning model to detect fraudulent credit card transactions.
-The model learns patterns from transaction data and predicts whether a transaction is **fraud** or **not fraud**.
+The system analyzes transaction features and predicts whether a transaction is **Fraudulent** or **Normal**.
 
-## Project Goal
+The project also includes a **Flask web application** where users can paste transaction feature values and get an instant prediction.
 
-The goal of this project is to use machine learning to identify suspicious credit card transactions and help reduce financial fraud.
+---
 
-## Project Structure
+# Project Goal
+
+The goal of this project is to apply **machine learning techniques** to identify suspicious credit card transactions and help reduce financial fraud.
+
+---
+
+# Project Structure
 
 ```
 credit-card-fraud-detection
@@ -24,31 +30,47 @@ credit-card-fraud-detection
 ├── models
 │   └── random_forest_model.pkl
 │
+├── templates
+│   └── index.html
+│
+├── static
+│   └── style.css
+│
+├── app.py
 ├── requirements.txt
+├── Procfile
 └── README.md
 ```
 
-## Technologies Used
+---
+
+# Technologies Used
 
 * Python
 * Pandas
+* NumPy
 * Scikit-learn
+* Flask
+* HTML / CSS
 * Jupyter Notebook
-* Random Forest Classifier
 
-## Steps in the Project
+---
 
-1. Load the credit card transaction dataset.
-2. Perform basic data exploration.
-3. Prepare the data for machine learning.
-4. Split the data into training and testing sets.
-5. Train a Random Forest model.
-6. Evaluate the model using accuracy.
-7. Save the trained model.
+# Machine Learning Workflow
 
-## Model Performance
+1. Load the credit card transaction dataset
+2. Perform data exploration and preprocessing
+3. Select relevant features
+4. Split dataset into training and testing sets
+5. Train machine learning models
+6. Evaluate model performance
+7. Save the trained model using **Joblib**
 
-The Random Forest model achieved very high accuracy on the dataset.
+---
+
+# Model Performance
+
+The Random Forest model achieved very high performance on the dataset.
 
 Example result:
 
@@ -56,47 +78,88 @@ Example result:
 Accuracy: 0.9998
 ```
 
-## How to Run the Project
+The model successfully identifies fraudulent transactions with high precision and recall.
 
-1. Clone the repository
+---
+
+# Web Application
+
+A simple **Flask web app** is included in this project.
+
+Users can:
+
+* Paste all **29 transaction feature values**
+* Click the **Predict** button
+* Instantly see whether the transaction is **Fraud** or **Normal**
+
+---
+
+# How to Run the Project Locally
+
+### 1. Clone the repository
 
 ```
 git clone https://github.com/your-username/credit-card-fraud-detection.git
 ```
 
-2. Go to the project folder
+### 2. Navigate to the project folder
 
 ```
 cd credit-card-fraud-detection
 ```
 
-3. Install required libraries
+### 3. Install dependencies
 
 ```
 pip install -r requirements.txt
 ```
 
-4. Run the training script
+### 4. Run the Flask application
 
 ```
-python src/train_model.py
+python app.py
 ```
 
-## Output
-
-After running the script, the trained model will be saved in the **models** folder as:
+### 5. Open in browser
 
 ```
-random_forest_model.pkl
+http://127.0.0.1:5000
 ```
 
-## Future Improvements
+---
 
-* Handle class imbalance better
-* Try other machine learning models
-* Build a web app for real-time fraud detection
-* Deploy the model
+# Model Input Format
 
-## Author
+The web app expects **29 feature values separated by commas**.
+
+Example:
+
+```
+0.1,-1.2,0.5,0.3,...,120
+```
+
+These values represent transaction features used by the trained model.
+
+---
+
+# Future Improvements
+
+Possible improvements for this project:
+
+* Improve UI and user experience
+* Add probability score for fraud prediction
+* Deploy using Docker
+* Add API endpoint for predictions
+* Use deep learning models for comparison
+
+---
+
+# Author
 
 Kartikey Gehra
+
+---
+
+# License
+
+This project is open-source and available for learning and educational purposes.
