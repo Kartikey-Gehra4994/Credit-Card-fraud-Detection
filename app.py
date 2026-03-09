@@ -5,7 +5,7 @@ import os
 
 app = Flask(__name__)
 
-# model load
+# load model
 model = joblib.load("models/random_forest_model.pkl")
 
 @app.route("/")
@@ -15,17 +15,42 @@ def home():
 @app.route("/predict", methods=["POST"])
 def predict():
 
-    input_data = request.form['features']
-    values = [float(x) for x in input_data.split(',')]
-    data = np.array([values])
-    prediction = model.predict(data)[0]
+    try:
+        input_data = request.form['features']
 
-    if prediction == 1:
-        result = "Fraud Transaction"
-    else:
-        result = "Normal Transaction"
+        # split values
+        values = [float(x) for x in input_data.split(',')]
 
-    return render_template("index.html", prediction_text=result)
+        # check feature count
+        if len(values) != 29:
+            return render_template(
+                "index.html",
+                prediction_text="Please enter exactly 29 values separated by commas."
+            )
+
+        data = np.array([values])
+
+        prediction = model.predict(data)[0]
+
+        if prediction == 1:
+            result = "Fraud Transaction"
+        else:
+            result = "Normal Transaction"
+
+        return render_template("index.html", prediction_text=result)
+
+    except ValueError:
+        return render_template(
+            "index.html",
+            prediction_text="Invalid input. Please enter numeric values separated by commas."
+        )
+
+    except Exception as e:
+        return render_template(
+            "index.html",
+            prediction_text=f"Error occurred: {str(e)}"
+        )
+
 
 if __name__ == "__main__":
     port = int(os.environ.get("PORT", 10000))
