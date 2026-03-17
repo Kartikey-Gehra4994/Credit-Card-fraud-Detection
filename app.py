@@ -25,7 +25,7 @@ def predict():
         if len(values) != 29:
             return render_template(
                 "index.html",
-                prediction_text="Please enter exactly 29 values separated by commas."
+                prediction_text="Enter exactly 29 values separated ( , )"
             )
 
         data = np.array([values])
@@ -42,7 +42,7 @@ def predict():
     except ValueError:
         return render_template(
             "index.html",
-            prediction_text="Invalid input. Please enter numeric values separated by commas."
+            prediction_text="Please enter numeric values separated ( , )"
         )
 
     except Exception as e:
